@@ -46,6 +46,7 @@ func onCallback(w http.ResponseWriter, r *http.Request) {
 	err := jdecoder.Decode(&cont)
 	if err != nil {
 		logger.Log.Logln(logger.LEVEL_WARNING, "Unable to unmarshal callback,", err)
+		return
 	}
 	noti := Notification{
 		Heading: "构建完毕",
