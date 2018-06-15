@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"configrd"
 	"encoding/json"
+	"fmt"
 	"logger"
 	"net/http"
 	"os"
@@ -44,6 +45,7 @@ func onCallback(w http.ResponseWriter, r *http.Request) {
 	}
 	jdecoder := json.NewDecoder(r.Body)
 	err := jdecoder.Decode(&cont)
+	fmt.Println("Recv ", cont)
 	if err != nil {
 		logger.Log.Logln(logger.LEVEL_WARNING, "Unable to unmarshal callback,", err)
 		return
