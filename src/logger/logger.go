@@ -19,7 +19,5 @@ const (
 
 // Logln is the base function to use to log.
 func (lg *Logger) Logln(level int, args ...interface{}) {
-	if int(*lg) < level {
-		fmt.Println("[", int(*lg), "]", args)
-	}
+	fmt.Println("[", int(*lg), "]", args)
 }

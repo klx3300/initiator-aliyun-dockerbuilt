@@ -11,8 +11,8 @@ import (
 )
 
 type AliCallback struct {
-	push_data  map[string]string
-	repository map[string]string
+	Push_data  map[string]string
+	Repository map[string]string
 }
 
 type Notification struct {
@@ -40,8 +40,8 @@ func main() {
 
 func onCallback(w http.ResponseWriter, r *http.Request) {
 	cont := AliCallback{
-		push_data:  make(map[string]string),
-		repository: make(map[string]string),
+		Push_data:  make(map[string]string),
+		Repository: make(map[string]string),
 	}
 	jdecoder := json.NewDecoder(r.Body)
 	err := jdecoder.Decode(&cont)
@@ -54,7 +54,7 @@ func onCallback(w http.ResponseWriter, r *http.Request) {
 		Heading: "构建完毕",
 		Content: "",
 	}
-	noti.Content = cont.repository["repo_full_name"] + ":" + cont.push_data["tag"] + " # " + cont.push_data["pushed_at"]
+	noti.Content = cont.Repository["repo_full_name"] + ":" + cont.Push_data["tag"] + " # " + cont.Push_data["pushed_at"]
 	marshed, _ := json.Marshal(noti)
 	_, httperr := http.Post(conf["CollectorAddr"], "application/json", bytes.NewReader(marshed))
 	if httperr != nil {
